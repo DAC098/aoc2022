@@ -42,3 +42,19 @@ where
 
     Ok(v)
 }
+
+pub fn get_file_reader<P>(file_path: Option<P>) -> error::Result<std::io::BufReader<std::fs::File>>
+where
+    P: Into<PathBuf>
+{
+    let Some(path_ref) = file_path else {
+        return Err(error::build::no_file_provided())
+    };
+
+    let full_path = get_full_path(path_ref)?;
+    let file = std::fs::OpenOptions::new()
+        .read(true)
+        .open(full_path)?;
+
+    Ok(std::io::BufReader::new(file))
+}

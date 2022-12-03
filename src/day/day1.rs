@@ -39,24 +39,12 @@ pub fn run(mut args: Args) -> error::Result<()> {
         }
     }
 
-    let Some(file_path) = file_path else {
-        return Err(error::Error::new(error::ErrorKind::MissingArgument)
-            .with_message("no file provided for input"));
-    };
-
     if total_top_elves == 0 {
         return Err(error::Error::new(error::ErrorKind::InvalidArgument)
             .with_message(format!("total top elves is 0")));
     }
 
-    let reader = {
-        let full_path = cli::get_full_path(file_path)?;
-        let file = std::fs::OpenOptions::new()
-            .read(true)
-            .open(full_path)?;
-
-        std::io::BufReader::new(file)
-    };
+    let reader = cli::get_file_reader(file_path)?;
     let mut lines = reader.lines();
     let mut line_count: usize = 0;
 

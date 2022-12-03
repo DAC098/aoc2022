@@ -75,12 +75,32 @@ pub mod build {
     use super::{Error, ErrorKind};
 
     /// common error for providing an invalid argument
+    #[inline]
     pub fn invalid_argument(arg: String) -> Error {
         let mut msg = String::from("given invalid argument. \"");
         msg.push_str(&arg);
         msg.push('"');
 
-        return Error::new(ErrorKind::InvalidArgument)
+        Error::new(ErrorKind::InvalidArgument)
             .with_message(msg)
+    }
+
+    #[inline]
+    pub fn no_file_provided() -> Error {
+        Error::new(ErrorKind::MissingArgument)
+            .with_message("no file provided for input")
+    }
+
+    #[inline]
+    pub fn bad_line_input<S>(count: usize, line: S) -> Error
+    where
+        S: AsRef<str>
+    {
+        Error::new(ErrorKind::BadInput)
+            .with_message(format!(
+                "a line in the file could not be parsed. line: {} \"{}\"", 
+                count, 
+                line.as_ref()
+            ))
     }
 }
