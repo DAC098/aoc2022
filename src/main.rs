@@ -15,6 +15,7 @@ fn main() {
     let result = match day.as_str() {
         "1" => day::day1::run(args),
         "2" => day::day2::run(args),
+        "3" => day::day3::run(args),
         _ => {
             Err(error::Error::new(error::ErrorKind::InvalidArgument)
                 .with_message(format!("unknown day specified. given: {}", day)))
