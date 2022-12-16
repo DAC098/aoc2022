@@ -1,5 +1,5 @@
 mod error;
-mod file;
+mod io;
 mod cli;
 mod day;
 
@@ -17,6 +17,7 @@ fn main() {
         "2" => day::day2::run(args),
         "3" => day::day3::run(args),
         "4" => day::day4::run(args),
+        "5" => day::day5::run(args),
         _ => {
             Err(error::Error::new(error::ErrorKind::InvalidArgument)
                 .with_message(format!("unknown day specified. given: {}", day)))
@@ -27,7 +28,7 @@ fn main() {
         print!("{}", err.kind);
 
         if let Some(message) = err.message {
-            print!(" {}", message);
+            print!(": {}", message);
         }
 
         if let Some(source) = err.source {

@@ -18,7 +18,7 @@ fn get_item_value(ch_int: &u32) -> Option<u32> {
     }
 }
 
-fn get_char_value(item: &u32) -> u32 {
+fn _get_char_value(item: &u32) -> u32 {
     if *item < 27 {
         // lower case letter
         *item + 0x60

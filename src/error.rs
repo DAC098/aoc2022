@@ -2,6 +2,7 @@ pub enum ErrorKind {
     InvalidArgument,
     MissingArgument,
     BadInput,
+    Unexpected,
     IoError,
 }
 
@@ -11,6 +12,7 @@ impl std::fmt::Display for ErrorKind {
             ErrorKind::InvalidArgument => f.write_str("InvalidArgument"),
             ErrorKind::MissingArgument => f.write_str("MissingArgument"),
             ErrorKind::BadInput => f.write_str("BadInput"),
+            ErrorKind::Unexpected => f.write_str("Unexpected"),
             ErrorKind::IoError => f.write_str("IoError"),
         }
     }
