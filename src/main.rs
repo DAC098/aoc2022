@@ -18,6 +18,7 @@ fn main() {
         "3" => day::day3::run(args),
         "4" => day::day4::run(args),
         "5" => day::day5::run(args),
+        "6" => day::day6::run(args),
         _ => {
             Err(error::Error::new(error::ErrorKind::InvalidArgument)
                 .with_message(format!("unknown day specified. given: {}", day)))
